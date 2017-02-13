@@ -6,8 +6,8 @@ from game_submenu import game_submenu
 from PIL import Image
 import pygame
 import lidapy
-from lidapy.util import MsgUtils
-from sensor_msgs.msg import Image as ImageMsg
+from sensor_msgs.msg import CompressedImage
+from StringIO import StringIO
 
 
 class main(object):
@@ -44,7 +44,7 @@ class main(object):
 
         lidapy.init(process_name='Environment')
 
-        self.image_topic = lidapy.Topic('image_topic', msg_type=ImageMsg)
+        self.image_topic = lidapy.Topic('image_topic', msg_type=CompressedImage)
 
         self.mainloop()
 
@@ -114,9 +114,12 @@ class main(object):
             # image_string = pygame.image.tostring(self.screen, 'RGB')
             screenshot = Image.frombytes('RGB', self.screen.get_size(), pygame.image.tostring(self.screen, 'RGB'))
 
-            msg = ImageMsg()
-            msg.width, msg.height = screenshot.size
-            msg.data = screenshot.tobytes()
+            buffer = StringIO()
+            screenshot.save(buffer, 'JPEG')
+
+            msg = CompressedImage()
+            msg.format = 'jpeg'
+            msg.data = buffer.getvalue()
 
             self.image_topic.send(msg)
 
