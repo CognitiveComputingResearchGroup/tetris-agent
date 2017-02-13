@@ -1,13 +1,15 @@
 '''
 '''
+import pygame
+from PIL import Image
+from StringIO import StringIO
+
+import lidapy
+from sensor_msgs.msg import CompressedImage
+
 import resources
 from constants import *
 from game_submenu import game_submenu
-from PIL import Image
-import pygame
-import lidapy
-from sensor_msgs.msg import CompressedImage
-from StringIO import StringIO
 
 
 class main(object):
@@ -136,10 +138,7 @@ class main(object):
         # end of game
         pygame.quit()
 
-
     def process_agent_action(self, action):
-        if action:
-            action = action.data
 
         if action == 'LEFT':
             self.submenu.left_pressed()
