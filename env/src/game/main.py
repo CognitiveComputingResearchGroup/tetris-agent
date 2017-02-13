@@ -22,7 +22,7 @@ class main(object):
         if debug.debug:
             flags = 0
         else:
-            flags = pygame.FULLSCREEN
+            flags = pygame.RESIZABLE
         screen = pygame.display.set_mode(SCREEN_SIZE, flags)
         pygame.display.set_caption(WINDOW_CAPTION)
         return screen
