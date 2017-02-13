@@ -29,23 +29,6 @@ def load_image(name, colorkey=None, perpixel_alpha=False):
         image.set_colorkey(colorkey, pygame.RLEACCEL)
     return image
 
-
-class dummysound:
-    def play(self): pass
-
-
-def load_sound(file):
-    import debug
-    if not pygame.mixer or not debug.playsounds: return dummysound()
-    file = os.path.join('data', file)
-    try:
-        sound = pygame.mixer.Sound(file)
-        return sound
-    except pygame.error:
-        print 'Warning, unable to load sound,', str(file)
-    return dummysound()
-
-
 # --------------------------------------------------------------------------- #
 fontfilename = os.path.join('data', 'font.ttf')
 
@@ -73,12 +56,3 @@ class load_all_images(object):
         self.vertical_border = load_image('border.bmp')
         self.horizontal_border = pygame.transform.rotate(self.vertical_border, 90)
 
-
-class load_all_sounds(object):
-    def __init__(self):
-        self.high_score = load_sound('highscore.wav')
-        self.game_over = load_sound('gameover.wav')
-        self.change_submenu = load_sound('switchsubmenu.wav')
-        self.launch_new_piece = load_sound('newpiece.wav')
-        self.got_lines = load_sound('gotlines.wav')
-        self.teleport = load_sound('teleport.wav')

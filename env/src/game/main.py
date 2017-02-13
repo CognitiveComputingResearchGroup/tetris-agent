@@ -1,10 +1,12 @@
 '''
-'''
-import debug
-import resources
+'''import resources
 from constants import *
 from game_submenu import game_submenu
+from PIL import Image
 import pygame
+import lidapy
+from lidapy.util import MsgUtils
+from sensor_msgs.msg import Image as ImageMsg
 
 
 class main(object):
@@ -15,10 +17,7 @@ class main(object):
     '''
 
     def make_screen(self):
-        if debug.debug:
-            flags = 0
-        else:
-            flags = pygame.RESIZABLE
+        flags = pygame.RESIZABLE
         screen = pygame.display.set_mode(SCREEN_SIZE, flags)
         pygame.display.set_caption(WINDOW_CAPTION)
         return screen
@@ -30,7 +29,6 @@ class main(object):
         self.screenrect = self.screen.get_rect()
 
         resources.images = resources.load_all_images()
-        resources.sounds = resources.load_all_sounds()
 
         pygame.display.set_icon(resources.images.icon)
 
@@ -42,6 +40,10 @@ class main(object):
         self.tochangeto = ''
 
         self.run = True
+
+        lidapy.init(process_name='Environment')
+
+        self.image_topic = lidapy.Topic('image_topic', msg_type=ImageMsg)
 
         self.mainloop()
 
@@ -107,6 +109,16 @@ class main(object):
             self.submenu.update()
             # display
             pygame.display.update(self.submenu.draw(self.screen))
+
+            # image_string = pygame.image.tostring(self.screen, 'RGB')
+            screenshot = Image.frombytes('RGB', self.screen.get_size(), pygame.image.tostring(self.screen, 'RGB'))
+
+            msg = ImageMsg()
+            msg.width, msg.height = screenshot.size
+            msg.data = screenshot.tobytes()
+
+            self.image_topic.send(msg)
+
             # wait and continue
             self.timer.tick(FPS)
 
