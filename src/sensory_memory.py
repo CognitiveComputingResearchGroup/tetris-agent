@@ -8,7 +8,7 @@ import lidapy
 from lidapy import LIDAThread, Config
 from sensor_msgs.msg import CompressedImage
 
-image_topic = lidapy.Topic('image_topic', msg_type=CompressedImage)
+image_topic = lidapy.Topic('images', msg_type=CompressedImage)
 
 
 def receive_image():
@@ -20,4 +20,4 @@ def receive_image():
 
 # Initialize the lidapy framework
 lidapy.init(config=Config(argv[1]), process_name='sensory_memory')
-LIDAThread(name='listener', callback=receive_image).start()
+LIDAThread(name='sensory_memory', callback=receive_image).start()

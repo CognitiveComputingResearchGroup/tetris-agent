@@ -18,4 +18,4 @@ def send_action():
 
 # Initialize the lidapy framework
 lidapy.init(config=Config(argv[1]), process_name='sensory_motor_memory')
-LIDAThread(name='listener', callback=send_action).start()
+LIDAThread(name='sensory_motor_memory', callback=send_action).start()
