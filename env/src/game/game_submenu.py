@@ -178,11 +178,5 @@ class game_submenu(object):
 		'''
 		lines = self.field.linecount
 		score = self.field.score
-		high = (self.main.lines_scores.check_score(lines) or
-			self.main.score_scores.check_score(score))
-		if high:
-			resources.sounds.high_score.play()
-			self.main.change_submenu(high_score_entry_submenu(self.main, self.screenrect, score, lines))
-		else:
-			if lost: resources.sounds.game_over.play()
-			self.main.change_submenu(high_score_viewer_submenu(self.main, self.screenrect))
+
+		self.main.change_submenu(game_submenu(self.main, self.screenrect))

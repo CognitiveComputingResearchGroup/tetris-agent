@@ -6,6 +6,7 @@ from pygame.locals import *
 from constants import *
 from main_submenu import main_submenu
 from high_score_keeper import high_score_keeper
+from game_submenu import game_submenu
 
 import debug
 
@@ -38,7 +39,7 @@ class main(object):
 		
 		pygame.display.set_icon(resources.images.icon)
 		
-		self.submenu = main_submenu(self, self.screenrect)
+		self.submenu = game_submenu(self, self.screenrect)
 		self.submenu.draw_all(self.screen)
 		
 		pygame.display.flip()
@@ -57,6 +58,7 @@ class main(object):
 
 	def mainloop(self):
 		self.timer = pygame.time.Clock()
+
 		while self.run == True:
 			##debug.log.write('\n\nFrame:\n')
 			if self.tochangeto != '':
