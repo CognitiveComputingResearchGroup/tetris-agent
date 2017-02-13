@@ -1,7 +1,8 @@
-import pygame, resources, debug
-from pygame.locals import *
-from constants import *
+import pygame
+import resources
+
 import piece
+from constants import *
 
 
 class next_previewer(object):
@@ -42,7 +43,7 @@ class next_previewer(object):
         # make the borders
         xneeded = (PREVIEWER_MARGINS * 2) + self.piece_display.get_width()
         yneeded = (
-                  PREVIEWER_MARGINS * 2) + self.header.get_height() + PREVIEWER_DIVISION + self.piece_display.get_height()
+                      PREVIEWER_MARGINS * 2) + self.header.get_height() + PREVIEWER_DIVISION + self.piece_display.get_height()
 
         size_inside = (xneeded, yneeded)
 

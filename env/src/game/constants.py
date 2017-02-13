@@ -3,7 +3,6 @@ constants.py
 
 Contains all the game constants. As a rule all constants are named in all caps.
 '''
-import pygame
 from pygame.locals import *
 
 # todo: tweak constants for best gameplay

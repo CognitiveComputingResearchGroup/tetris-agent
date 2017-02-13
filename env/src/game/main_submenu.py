@@ -1,11 +1,8 @@
-import pygame
-import resources
-from pygame.locals import *
-from constants import *
-from TextWidget import TextWidget
-from image_holder import image_holder
 import game_submenu
-import debug
+import resources
+from TextWidget import TextWidget
+from constants import *
+from image_holder import image_holder
 
 
 class main_submenu():

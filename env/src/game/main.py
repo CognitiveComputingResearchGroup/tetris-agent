@@ -1,12 +1,10 @@
 '''
 '''
-import pygame
+import debug
 import resources
-from pygame.locals import *
 from constants import *
 from game_submenu import game_submenu
-
-import debug
+import pygame
 
 
 class main(object):

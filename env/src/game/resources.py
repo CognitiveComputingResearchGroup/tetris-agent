@@ -4,9 +4,8 @@ resources.py
 contains the image and sound loading functions and all the images and all the
 sounds used in the game
 '''
-import pygame
-from pygame.locals import *
 import os
+import pygame
 
 
 def load_image(name, colorkey=None, perpixel_alpha=False):
@@ -49,6 +48,7 @@ def load_sound(file):
 
 # --------------------------------------------------------------------------- #
 fontfilename = os.path.join('data', 'font.ttf')
+
 
 class load_all_images(object):
     def __init__(self):

@@ -1,11 +1,9 @@
 '''
 '''
-import pygame
 import brick
-from pygame.locals import *
-from constants import *
-import debug
 import resources
+import pygame
+from constants import *
 
 
 def fix_piece_map(map):

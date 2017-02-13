@@ -1,12 +1,11 @@
 import pygame
+
 import resources
-import debug
-from pygame.locals import *
+from TextWidget import TextWidget
 from constants import *
+from next_previewer import next_previewer
 from playing_field import playing_field
 from score_display import score_display
-from next_previewer import next_previewer
-from TextWidget import TextWidget
 
 
 class game_submenu(object):

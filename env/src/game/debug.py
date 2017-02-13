@@ -3,7 +3,6 @@ debug.py
 
 contains the debugging and logging functions and variables
 '''
-import sys
 
 # ---------------------- #
 debug = False

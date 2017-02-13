@@ -1,11 +1,10 @@
 '''
 contains the base brick class and all the subclasses used
 '''
-import pygame
-import resources
 import copy
-import debug
-from pygame.locals import *
+
+import resources
+import pygame
 from constants import *
 
 current_id = 0

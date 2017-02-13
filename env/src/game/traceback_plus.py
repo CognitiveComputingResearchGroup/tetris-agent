@@ -10,7 +10,8 @@ when the exception occured. The function contained in this module gives
 you access to this plethra of information, it is used in the same way as
 the traceback.print_exc() function.
 """
-import sys, traceback
+import sys
+import traceback
 
 
 def print_exc_plus(File=sys.stdout):

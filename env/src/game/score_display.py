@@ -1,5 +1,6 @@
-import pygame, resources, debug
-from pygame.locals import *
+import pygame
+import resources
+
 from constants import *
 
 

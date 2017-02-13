@@ -2,10 +2,12 @@
 playing_field.py
 
 '''
-import pygame, random, copy, resources, debug
-from pygame.locals import *
-from piece import *
+import copy
+import pygame
+import random
+
 from constants import *
+from piece import *
 
 
 class playing_field(object):
@@ -113,7 +115,7 @@ class playing_field(object):
         def offset(x, y):
             ''' offsets to place pos onto the playing field on the screen '''
             return (
-            x + topleft[0] + self.vertical_border.get_width(), y + topleft[1] + self.horizontal_border.get_height())
+                x + topleft[0] + self.vertical_border.get_width(), y + topleft[1] + self.horizontal_border.get_height())
 
         image.set_clip(offset(0, 0), self.background.get_size())  # stop drawing of out of bounds bricks
         rects = []
