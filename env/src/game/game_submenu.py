@@ -1,7 +1,6 @@
 import pygame
 
 import resources
-from TextWidget import TextWidget
 from constants import *
 from next_previewer import next_previewer
 from playing_field import playing_field
@@ -31,8 +30,6 @@ class game_submenu(object):
         fieldrect.center = (screenrect.center[0] / 2, screenrect.center[1])
         self.fieldpos = fieldrect.topleft
 
-        rightsiderect = pygame.Rect(screenrect.centerx, 0, screenrect.width / 2, screenrect.height)
-
         self.next_previewer = next_previewer(self.field)
         previewer_rect = pygame.Rect(0, 0, 140, 225)
         previewer_rect.midtop = (round(screenrect.width * 0.75, 0), 30)
@@ -45,18 +42,6 @@ class game_submenu(object):
         self.score_display_pos = score_display_rect.topleft
 
         self.textwidgets = []
-
-        self.pausebutton = TextWidget(text='Pause', color=BUTTON_COLOR, font_filename=resources.fontfilename)
-        self.pausebutton.on_mouse_click = self.pause_click
-        self.pausebutton.rect.midtop = score_display_rect.midbottom
-        self.pausebutton.rect.top += 30
-        self.textwidgets.append(self.pausebutton)
-
-        self.quitbutton = TextWidget(text='Quit', color=BUTTON_COLOR, font_filename=resources.fontfilename)
-        self.quitbutton.on_mouse_click = self.quit_click
-        self.quitbutton.rect.midtop = self.pausebutton.rect.midbottom
-        self.quitbutton.rect.top += 30
-        self.textwidgets.append(self.quitbutton)
 
     def draw(self, screen):
         rects = []
@@ -80,20 +65,9 @@ class game_submenu(object):
             widget.draw(screen, self.background)
 
     def update(self):
-        if self.paused:
-            current = self.pausebutton.colour
-            red = current[0] + self.colorchange
-            if red > max(PAUSE_BUTTON_COLOR1[0], PAUSE_BUTTON_COLOR2[0]):
-                red = max(PAUSE_BUTTON_COLOR1[0], PAUSE_BUTTON_COLOR2[0])
-                self.colorchange *= -1
-            elif red < min(PAUSE_BUTTON_COLOR1[0], PAUSE_BUTTON_COLOR2[0]):
-                red = min(PAUSE_BUTTON_COLOR1[0], PAUSE_BUTTON_COLOR2[0])
-                self.colorchange *= -1
-            self.pausebutton.colour = (red, 0, 0)
-        else:
-            self.field.update()
-            self.score_display.update()
-            self.next_previewer.update()
+        self.field.update()
+        self.score_display.update()
+        self.next_previewer.update()
 
     def destroy(self):
         self.field.destroy()
@@ -148,31 +122,5 @@ class game_submenu(object):
         if self.field.piece != None:
             self.field.piece.pressed['right'] = False
 
-    def pause_click(self, event):
-        if self.paused:
-            self.paused = False
-            self.pausebutton.colour = BUTTON_COLOR
-            self.pausebutton.bold_rect = self.pausebutton.rect  # set the current area to be erased next frame
-            self.pausebutton.text = 'Pause'
-        else:
-            self.paused = True
-            self.pausebutton.colour = PAUSE_BUTTON_COLOR1
-            self.colorchange = PAUSE_BUTTON_COLOR_CHANGE_RATE
-            self.pausebutton.text = 'Paused'
-
-    def quit_click(self, event):
-        self.end_game(False)
-        resources.sounds.change_submenu.play()
-
     def end_game(self, lost):
-        '''
-        ends the game.
-        if lost is true and no high score was acheived a game over sound is played.
-        if a high score was achieved, regardless of what is passed, a high
-        score sound is played and you are taken to a name entry screen.
-        if no high score is achieved you are taken to the high score screen.
-        '''
-        lines = self.field.linecount
-        score = self.field.score
-
         self.main.change_submenu(game_submenu(self.main, self.screenrect))
