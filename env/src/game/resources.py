@@ -49,9 +49,6 @@ def load_sound(file):
 
 # --------------------------------------------------------------------------- #
 fontfilename = os.path.join('data', 'font.ttf')
-linesfilename = 'lines.scores'
-scorefilename = 'score.scores'
-
 
 class load_all_images(object):
     def __init__(self):

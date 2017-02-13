@@ -4,13 +4,11 @@ from pygame.locals import *
 from constants import *
 from TextWidget import TextWidget
 from image_holder import image_holder
-from high_score_viewer_submenu import high_score_viewer_submenu
-from animated_background import animated_background
 import game_submenu
 import debug
 
 
-class main_submenu(animated_background):
+class main_submenu():
     '''
     the main menu, has a title image, and buttons for starting a game, looking
     at the high scores, and quitting.
@@ -49,8 +47,6 @@ class main_submenu(animated_background):
 
         r = self.playbutton.rect.unionall([self.highbutton.rect, self.quitbutton.rect])
         r.inflate_ip(200, 30)
-
-        animated_background.__init__(self, screenrect.size, [r])
 
     def draw(self, screen):
         rects = []
@@ -118,12 +114,3 @@ class main_submenu(animated_background):
     def play_click(self, event):
         self.main.change_submenu(game_submenu.game_submenu(self.main, self.screenrect))
         resources.sounds.change_submenu.play()
-
-    def high_click(self, event):
-        ##print >> debug.log, 'high button pressed'
-        resources.sounds.change_submenu.play()
-        self.main.change_submenu(high_score_viewer_submenu(self.main, self.screenrect))
-
-    def quit_click(self, event):  # todo: fix bug where quit button clicked and it freezes instead of quitting
-        print >> debug.log, 'quit button pressed'
-        self.main.destroy()

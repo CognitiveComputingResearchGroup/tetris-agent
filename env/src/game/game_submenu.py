@@ -7,8 +7,6 @@ from playing_field import playing_field
 from score_display import score_display
 from next_previewer import next_previewer
 from TextWidget import TextWidget
-from high_score_entry_submenu import high_score_entry_submenu
-from high_score_viewer_submenu import high_score_viewer_submenu
 
 
 class game_submenu(object):

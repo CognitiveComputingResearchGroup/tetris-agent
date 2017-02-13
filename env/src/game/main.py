@@ -4,8 +4,6 @@ import pygame
 import resources
 from pygame.locals import *
 from constants import *
-from main_submenu import main_submenu
-from high_score_keeper import high_score_keeper
 from game_submenu import game_submenu
 
 import debug
@@ -35,9 +33,6 @@ class main(object):
 
         resources.images = resources.load_all_images()
         resources.sounds = resources.load_all_sounds()
-
-        self.lines_scores = high_score_keeper(resources.linesfilename, NUM_HIGH_SCORES, DEFAULT_LINES_LIST)
-        self.score_scores = high_score_keeper(resources.scorefilename, NUM_HIGH_SCORES, DEFAULT_SCORE_LIST)
 
         pygame.display.set_icon(resources.images.icon)
 
