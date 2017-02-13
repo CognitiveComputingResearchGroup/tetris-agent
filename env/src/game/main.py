@@ -1,5 +1,6 @@
 '''
-'''import resources
+'''
+import resources
 from constants import *
 from game_submenu import game_submenu
 from PIL import Image
