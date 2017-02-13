@@ -124,7 +124,6 @@ class piece(object):
                 if not r:
                     self.move(TILE_SIZE[0], 0)
                 else:
-                    resources.sounds.teleport.play()
                     break
         elif direction == 'left':
             while True:
@@ -132,7 +131,6 @@ class piece(object):
                 if not l:
                     self.move(-TILE_SIZE[0], 0)
                 else:
-                    resources.sounds.teleport.play()
                     break
         else:
             raise TypeError, 'direction must be either "left" or "right"'

@@ -212,8 +212,6 @@ class playing_field(object):
                 # awwww, this row isnt a line
                 nonlinebricks += currentline
         if lines != []:
-            # we have lines
-            resources.sounds.got_lines.play()
             # add to scores
             self.linecount += len(lines)
             self.score += ((len(lines) ** 2) * POINTS_PER_LINE)
@@ -256,7 +254,6 @@ class playing_field(object):
         launch a new piece and make the necessary
         changes to put the user in control
         '''
-        resources.sounds.launch_new_piece.play()
         self.state = 'moving'
         # choose a map for the new piece
         m = self.get_new_piece()
