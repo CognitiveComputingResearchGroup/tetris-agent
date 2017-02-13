@@ -9,13 +9,15 @@ import sys
 debug = False
 logdata = True
 playsounds = True
-	
+
+
 # ---------------------- #
 
 class dummylog(object):
-	def write(self, string): pass
+    def write(self, string): pass
+
 
 if debug and logdata:
-	log = open('log.txt', 'w')
+    log = open('log.txt', 'w')
 else:
-	log = open('log.txt', 'w')
+    log = open('log.txt', 'w')

@@ -12,7 +12,8 @@ the traceback.print_exc() function.
 """
 import sys, traceback
 
-def print_exc_plus(File = sys.stdout):
+
+def print_exc_plus(File=sys.stdout):
     """ Print the usual traceback information, followed by a listing of
         all the local variables in each frame.
 
@@ -40,13 +41,13 @@ def print_exc_plus(File = sys.stdout):
         stack.append(f)
         f = f.f_back
     stack.reverse()
-    traceback.print_exc(file = File)
+    traceback.print_exc(file=File)
     File.write('\nLocals by frame, innermost last\n')
     for frame in stack:
         File.write('\n')
         File.write("Frame %s in %s at line %s\n" % (frame.f_code.co_name,
-                                             frame.f_code.co_filename,
-                                             frame.f_lineno)
+                                                    frame.f_code.co_filename,
+                                                    frame.f_lineno)
                    )
         for key, value in frame.f_locals.items():
             # we must _absolutely_ avoid propagating exceptions, and str(value)
@@ -57,11 +58,12 @@ def print_exc_plus(File = sys.stdout):
                 File.write("\t%20s = <ERROR WHILE PRINTING VALUE>\n" % key)
 
 
-
 if __name__ == "__main__":
     # an example situation where you would use it:
-    
-    data = ['1', '2', 3, '4'] # Typo: we "forget" the quotes on the three
+
+    data = ['1', '2', 3, '4']  # Typo: we "forget" the quotes on the three
+
+
     def pad4(seq):
         """
         Pad each string in seq with zeros up to four places.
@@ -72,19 +74,20 @@ if __name__ == "__main__":
         for thing in seq:
             return_value.append('0' * (4 - len(thing)) + thing)
         return return_value
-    
+
+
     try:
         pad4(data)
     except:
         print_exc_plus()
 
-    # note how easy it is to see that we forgot the quotes from data[2].
-    
-    # Where you would normally have to guess or wade through your code
-    # to find the problem, you now have it right at your fingertips.
+        # note how easy it is to see that we forgot the quotes from data[2].
 
-    # using this recipe has spawned a whole new programming methodology
-    # for me, which not only improves speed, but productivity. In all situations
-    # where it is possible, try to bring necessary variables into local scope.
-    # this not only allows me to see what they are when exceptions occur, but
-    # it also speeds up the program because looking up local variables is very fast.
+        # Where you would normally have to guess or wade through your code
+        # to find the problem, you now have it right at your fingertips.
+
+        # using this recipe has spawned a whole new programming methodology
+        # for me, which not only improves speed, but productivity. In all situations
+        # where it is possible, try to bring necessary variables into local scope.
+        # this not only allows me to see what they are when exceptions occur, but
+        # it also speeds up the program because looking up local variables is very fast.
